@@ -1,0 +1,23 @@
+# 数据源
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/seata_order?characterEncoding=utf8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #初始化时运行sql脚本
+    schema: classpath:sql/schema.sql
+    initialization-mode: never
+  application:
+    name: order-seata
+#设置mybatis
+mybatis:
+  mapper-locations: classpath:com/example/order/mapper/*Mapper.xml
+  #config-location: classpath:mybatis-config.xml
+  typeAliasesPackage: com.example.order.pojo
+  configuration:
+    mapUnderscoreToCamelCase: true
+server:
+  port: 8070

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.stock.mapper.StockMapper">
+    <resultMap id="BaseResultMap" type="com.example.stock.pojo.Stock">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="product_id" jdbcType="INTEGER" property="productId" />
+        <result column="count" jdbcType="INTEGER" property="count" />
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from stock_tbl
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.example.stock.pojo.Stock">
+        insert into stock_tbl (id, product_id, count
+        )
+        values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}
+               )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.example.stock.pojo.Stock">
+        update stock_tbl
+        set product_id = #{productId,jdbcType=INTEGER},
+            count = #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select id, product_id, count
+        from stock_tbl
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, product_id, count
+        from stock_tbl
+    </select>
+
+    <update id="reduct">
+        update stock_tbl set `count`=`count`-1
+        where product_id=#{product_id}
+    </update>
+</mapper>

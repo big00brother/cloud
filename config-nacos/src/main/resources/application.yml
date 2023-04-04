@@ -1,0 +1,5 @@
+server:
+  port: 8050
+# 在配置中心：可以通过profile进行设置，
+# 只有默认的配置文件才能结合profile进行使用，
+# 对应的dataid： ${spring.application.name}-${profile}.${file-extension:properties}

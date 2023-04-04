@@ -1,0 +1,19 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #是否启动自动识别nacos服务
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: dev
+#    loadbalancer:
+#      ribbon:
+#        enabled: false

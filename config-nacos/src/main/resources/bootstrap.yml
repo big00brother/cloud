@@ -1,0 +1,21 @@
+spring:
+  application:
+    # 会自动根据服务名称取dataid对应的配置文件，如果dataid跟服务名不一致，则需要手动指定dataid
+    name: com.example.order.redis
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      config:
+        namespace: dev
+        # nacos客户端默认是properties的文件扩展名
+        # 一旦修改成了非properties格式，则必须通过file-extension进行设置
+        file-extension: yaml
+        group: example
+        shared-configs:
+          - data-id: com.example.order.user
+            group: example
+            file-extension: yaml
+            refresh: true
+#        refresh-enabled: false

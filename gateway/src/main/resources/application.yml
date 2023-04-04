@@ -1,0 +1,46 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      # 跨域配置
+      globalcors:
+        cors-configurations:
+          '[/**]':   # 允许跨域访问的资源
+            allowedOrigins: "*"   #跨域允许来源
+            allowedMethods:
+              - GET
+              - POST
+      #路由规则
+      routes:
+        - id: order_route # 路由的唯一标识，路由到order
+          uri: lb://alibaba-order-seata #需要转发的地址  lb: 使用nacos中的本地负载均衡策略
+          #断言规则 用于路由规则的匹配
+          predicates:
+            - Path=/order/**
+              #  http://localhost:8088/order/add↓
+              #  http://localhost:8020/order/add
+#            - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+#            - Header=X_Request_Id,\d+
+#            - Method=POST
+#            - Query=name,lisi|zhangsan
+#            - CheckAuth=wangwu
+#          filters:
+#            - AddRequestHeader=X-Request-color, red
+#            - PrefixPath=/mall-order  # 添加前缀 对应微服务需要配置context-path
+#            - RedirectTo=302, https://www.baidu.com/
+#            - CheckAuth=zhangsan
+#            - StripPrefix=1 # 转发之前去掉第一层路径
+#        - id:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: dev
+#配置sentinel
+#    sentinel:
+#      transport:
+#        dashboard: 127.0.0.1:8858
